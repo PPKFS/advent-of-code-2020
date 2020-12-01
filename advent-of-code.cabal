@@ -1,63 +1,71 @@
-cabal-version:       2.0
+cabal-version:       2.4
 name:                advent-of-code
-version:             0.0.0
-synopsis:            Advent of Code 2020
-description:         Advent of Code 2020
-homepage:            https://github.com/Avery/advent-of-code
-bug-reports:         https://github.com/Avery/advent-of-code/issues
+version:             0.0.0.0
+synopsis:            
+description:         
+homepage:            https://github.com/PPKFS/advent-of-code-2020
+bug-reports:         
 license:             MIT
 license-file:        LICENSE
-author:              PPK
-maintainer:          thecommunistduck@hotmail.co.uk
-copyright:           2020 PPK
+author:              Avery
+maintainer:          Avery <thecommunistduck@hotmail.co.uk>
+copyright:           2020 Avery
+category:            
 build-type:          Simple
 extra-doc-files:     README.md
-                   , CHANGELOG.md
-tested-with:         GHC == 8.6.4
+                     CHANGELOG.md
+tested-with:         GHC == 8.8.3
 
 source-repository head
   type:                git
-  location:            https://github.com/Avery/advent-of-code.git
+  location:            https://github.com/PPKFS/advent-of-code-2020.git
 
+common common-options
+  build-depends:       base-noprelude ^>= 4.13.0.0
+                     , relude
+                     , tasty
+                     , tasty-hunit
+  ghc-options:         -Wall
+                       -Wcompat
+                       -Widentities
+                       -Wincomplete-uni-patterns
+                       -Wincomplete-record-updates
+                       ---ddump-splices
+                       ---ddump-to-file
+  if impl(ghc >= 8.0)
+    ghc-options:       -Wredundant-constraints
+  if impl(ghc >= 8.2)
+    ghc-options:       -fhide-source-paths
+  if impl(ghc >= 8.4)
+    ghc-options:       -Wmissing-export-lists
+                       -Wpartial-fields
+  if impl(ghc >= 8.8)
+    ghc-options:       
+
+  default-language:    Haskell2010
+  default-extensions: NoImplicitPrelude OverloadedStrings MultiParamTypeClasses RankNTypes FlexibleContexts TemplateHaskell FlexibleInstances FunctionalDependencies RecordWildCards ConstraintKinds KindSignatures DataKinds GADTs DataKinds DefaultSignatures EmptyCase ExistentialQuantification ScopedTypeVariables StandaloneKindSignatures ScopedTypeVariables MultiWayIf LambdaCase QuasiQuotes
 library
+  import:              common-options
   hs-source-dirs:      src
   exposed-modules:     AdventOfCode
-                       Prelude
-
-  build-depends:       base-noprelude ^>= 4.12.0.0
-                     , relude
-
-  ghc-options:         -Wall
-                       -Wincomplete-uni-patterns
-                       -Wincomplete-record-updates
-                       -Wcompat
-                       -Widentities
-                       -Wredundant-constraints
-                       -fhide-source-paths
-                       -Wmissing-export-lists
-                       -Wpartial-fields
-
-  default-language:    Haskell2010
+  other-modules:       
 
 executable advent-of-code
+  import:              common-options
   hs-source-dirs:      app
   main-is:             Main.hs
-
-  build-depends:       base-noprelude ^>= 4.12.0.0
-                     , advent-of-code
-                     , relude
-
-  ghc-options:         -Wall
-                       -threaded
+  build-depends:       advent-of-code
+  ghc-options:         -threaded
                        -rtsopts
                        -with-rtsopts=-N
-                       -Wincomplete-uni-patterns
-                       -Wincomplete-record-updates
-                       -Wcompat
-                       -Widentities
-                       -Wredundant-constraints
-                       -fhide-source-paths
-                       -Wmissing-export-lists
-                       -Wpartial-fields
 
-  default-language:    Haskell2010
+
+test-suite advent-of-code-test
+  import:              common-options
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       advent-of-code
+  ghc-options:         -threaded
+                       -rtsopts
+                       -with-rtsopts=-N

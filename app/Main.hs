@@ -1,7 +1,7 @@
 module Main (main) where
 
-import AdventOfCode (someFunc)
-
+import AdventOfCode (doDay1)
+import Relude
 
 main :: IO ()
-main = someFunc
+main = print "wrong"

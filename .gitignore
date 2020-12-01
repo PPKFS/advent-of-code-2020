@@ -17,6 +17,7 @@ cabal-dev
 .hpc
 .cabal-sandbox/
 cabal.sandbox.config
+stack.yaml.lock
 cabal.config
 cabal.project.local
 .ghc.environment.*
