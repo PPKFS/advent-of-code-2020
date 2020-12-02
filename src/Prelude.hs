@@ -1,7 +1,7 @@
 -- | Uses [relude](https://hackage.haskell.org/package/relude) as default Prelude.
 
 module Prelude
-       ( module relude
+       ( module Relude
        ) where
 
-import relude
+import Relude

@@ -9,7 +9,7 @@ main :: IO ()
 main = defaultMain tests
 
 tests :: TestTree
-tests = makeTests [day1]
+tests = makeTests [day1, day2]
 
 day1 :: IO ()
 day1 = do
@@ -17,6 +17,12 @@ day1 = do
     doDay1 2
     putStrLn "Day1 Part 2:"
     doDay1 3
+
+day2 = do
+  putStrLn "Day2 Part 1:"
+  doDay2 validPWPart1
+  putStrLn "Day1 Part 2:"
+  doDay2 validPWPart2
 
 makeTests :: [Assertion] -> TestTree
 makeTests lst = testGroup "Tests" $ zipWith

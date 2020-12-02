@@ -23,9 +23,17 @@ source-repository head
 common common-options
   build-depends:       base-noprelude ^>= 4.13.0.0
                      , relude
-                     , tasty
-                     , tasty-hunit
-  ghc-options:         -Wall
+                      , attoparsec
+                      , base >=4.7 && <5
+                      , containers
+                      , directory
+                      , mtl
+                      , optparse-applicative
+                      , parser-combinators
+                      , pointedlist
+                      , text
+                      , vector
+  ghc-options:         
                        -Wcompat
                        -Widentities
                        -Wincomplete-uni-patterns
@@ -43,29 +51,53 @@ common common-options
     ghc-options:       
 
   default-language:    Haskell2010
-  default-extensions: NoImplicitPrelude OverloadedStrings MultiParamTypeClasses RankNTypes FlexibleContexts TemplateHaskell FlexibleInstances FunctionalDependencies RecordWildCards ConstraintKinds KindSignatures DataKinds GADTs DataKinds DefaultSignatures EmptyCase ExistentialQuantification ScopedTypeVariables StandaloneKindSignatures ScopedTypeVariables MultiWayIf LambdaCase QuasiQuotes
+  default-extensions: NoImplicitPrelude OverloadedStrings MultiParamTypeClasses RankNTypes FlexibleContexts TemplateHaskell FlexibleInstances FunctionalDependencies RecordWildCards ConstraintKinds KindSignatures DataKinds GADTs DataKinds DefaultSignatures EmptyCase ExistentialQuantification ScopedTypeVariables StandaloneKindSignatures ScopedTypeVariables MultiWayIf LambdaCase QuasiQuotes TupleSections
+
 library
-  import:              common-options
-  hs-source-dirs:      src
-  exposed-modules:     AdventOfCode
-  other-modules:       
+  import:
+    common-options
+  exposed-modules:
+      Days.Day01
+      Days.Day02
+      Days.Day03
+      Days.Day04
+      Days.Day05
+      Days.Day06
+      Days.Day07
+      Days.Day08
+      Days.Day09
+      Days.Day10
+      Days.Day11
+      Days.Day12
+      Days.Day13
+      Days.Day14
+      Days.Day15
+      Days.Day16
+      Days.Day17
+      Days.Day18
+      Days.Day19
+      Days.Day20
+      Days.Day21
+      Days.Day22
+      Days.Day23
+      Days.Day24
+      Days.Day25
+      Program.RunDay
+      Util.Parsers
+      Util.Util
+  other-modules: Prelude
+  hs-source-dirs:
+      src
+
+  default-language: Haskell2010
 
 executable advent-of-code
-  import:              common-options
-  hs-source-dirs:      app
-  main-is:             Main.hs
-  build-depends:       advent-of-code
-  ghc-options:         -threaded
-                       -rtsopts
-                       -with-rtsopts=-N
-
-
-test-suite advent-of-code-test
-  import:              common-options
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test
-  main-is:             Spec.hs
-  build-depends:       advent-of-code
-  ghc-options:         -threaded
-                       -rtsopts
-                       -with-rtsopts=-N
+  import:
+    common-options
+  main-is: Main.hs
+  build-depends: advent-of-code
+  hs-source-dirs:
+      app
+  default-extensions: EmptyCase FlexibleContexts FlexibleInstances InstanceSigs MultiParamTypeClasses LambdaCase MultiWayIf RecordWildCards TupleSections OverloadedStrings ScopedTypeVariables GADTs NumericUnderscores DeriveFunctor DeriveFoldable
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  default-language: Haskell2010
