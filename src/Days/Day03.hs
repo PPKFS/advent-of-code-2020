@@ -14,6 +14,7 @@ import Prelude
 import qualified Program.RunDay as R (runDay)
 import Data.Attoparsec.Text
 import Data.Void
+import qualified Data.Text as T 
 {- ORMOLU_ENABLE -}
 
 runDay :: Bool -> String -> IO ()
@@ -21,19 +22,25 @@ runDay = R.runDay inputParser partA partB
 
 ------------ PARSER ------------
 inputParser :: Parser Input
-inputParser = error "Not implemented yet!"
+inputParser = takeWhile1 (/= '\n') `sepBy` endOfLine
 
 ------------ TYPES ------------
-type Input = Void
+type Input = [Text]
 
-type OutputA = Void
+type OutputA = Int
 
-type OutputB = Void
+type OutputB = Int
 
 ------------ PART A ------------
+takeEvery n [] = []
+takeEvery n (x : xs)  = x : takeEvery n (drop (n-1) xs)
+
+downSlope across dwn m = length $ filter (== '#') $ zipWith (\ x y -> T.index y (across * x `mod` wrap)) [0 .. ] (takeEvery dwn m) where
+    wrap = T.length (Data.List.head m)
 partA :: Input -> OutputA
-partA = error "Not implemented yet!"
+partA = downSlope 3 1
 
 ------------ PART B ------------
 partB :: Input -> OutputB
-partB = error "Not implemented yet!"
+partB i = sl 1 1 * sl 3 1 * sl 5 1 * sl 7 1 * sl 1 2 where
+    sl v r= downSlope v r i
