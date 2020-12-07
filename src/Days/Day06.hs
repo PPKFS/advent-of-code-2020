@@ -1,7 +1,7 @@
 module Days.Day06 (runDay) where
 
 {- ORMOLU_DISABLE -}
-import Data.List
+import qualified Data.List as L
 import Data.Map.Strict (Map)
 import qualified Data.Map.Strict as Map
 import Data.Maybe
@@ -18,22 +18,22 @@ import Data.Void
 
 runDay :: Bool -> String -> IO ()
 runDay = R.runDay inputParser partA partB
+------------ TYPES ------------
+type Input = [ [[Answer]] ]
+
+type Answer = Char
+
+type OutputA = Int
+
+type OutputB = Int
 
 ------------ PARSER ------------
 inputParser :: Parser Input
-inputParser = error "Not implemented yet!"
-
------------- TYPES ------------
-type Input = Void
-
-type OutputA = Void
-
-type OutputB = Void
-
+inputParser = (many1 letter `sepBy` endOfLine) `sepBy` (endOfLine >> endOfLine)
 ------------ PART A ------------
 partA :: Input -> OutputA
-partA = error "Not implemented yet!"
+partA = sum . map (length . L.foldr1 L.union)
 
 ------------ PART B ------------
 partB :: Input -> OutputB
-partB = error "Not implemented yet!"
+partB = sum . map (length . L.foldr1 L.intersect)
